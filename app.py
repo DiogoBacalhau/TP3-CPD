@@ -25,10 +25,10 @@ app.config['DEBUG'] = True
 # ==========
 
 # Creates an sqlite database in memory
-schema = "./schema.sql"
+SCHEMA = "./schema.sql"
 if not devMode :
     schema = getcwd() + "/TP3-CPD/schema.sql"
-db = Database(filename=':memory:', schema=schema)
+db = Database(filename=':memory:', schema=SCHEMA)
 db.recreate()
 
 
