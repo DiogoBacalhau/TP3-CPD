@@ -3,10 +3,11 @@
 
 """
 
+from os import getcwd
+from datetime import datetime
 from flask import Flask, request, jsonify, make_response
 from models import Database
-from datetime import datetime
-from os import getcwd
+
 
 
 # ==========
@@ -25,7 +26,8 @@ app.config['DEBUG'] = True
 
 # Creates an sqlite database in memory
 schema = "./schema.sql"
-if not devMode : schema = getcwd()+"/TP3-CPD/schema.sql"
+if not devMode :
+    schema = getcwd() + "/TP3-CPD/schema.sql"
 db = Database(filename=':memory:', schema=schema)
 db.recreate()
 
@@ -235,4 +237,5 @@ def task_detail(pk, task_pk):
 
 
 if __name__ == "__main__":
-    if devMode : app.run(host='0.0.0.0', port=8000)
+    if devMode :
+        app.run(host='0.0.0.0', port=8000)

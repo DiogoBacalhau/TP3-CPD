@@ -178,5 +178,3 @@ class Database:
                 task_pk,)
         )
         return bool(result_task)
-
-
