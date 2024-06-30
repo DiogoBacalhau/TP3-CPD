@@ -6,12 +6,14 @@
 from flask import Flask, request, jsonify, make_response
 from models import Database
 from datetime import datetime
+from os import getcwd
 
 
 # ==========
 #  Settings
 # ==========
 
+devMode = False
 app = Flask(__name__)
 app.config['STATIC_URL_PATH'] = '/static'
 app.config['DEBUG'] = True
@@ -22,7 +24,9 @@ app.config['DEBUG'] = True
 # ==========
 
 # Creates an sqlite database in memory
-db = Database(filename=':memory:', schema='schema.sql')
+schema = "./schema.sql"
+if not devMode : schema = getcwd()+"/TP3-CPD/schema.sql"
+db = Database(filename=':memory:', schema=schema)
 db.recreate()
 
 
@@ -231,4 +235,4 @@ def task_detail(pk, task_pk):
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8000)
+    if devMode : app.run(host='0.0.0.0', port=8000)
